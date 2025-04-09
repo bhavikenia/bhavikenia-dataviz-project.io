@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!-- <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -103,4 +103,165 @@
         <p><a href="https://www.kaggle.com/datasets/atharvasoundankar/global-cybersecurity-threats-2015-2024/data?select=Global_Cybersecurity_Threats_2015-2024.csv" target="_blank">Dataset</a></p>
     </div>
 </body>
+</html> -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cybersecurity Visualization</title>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700&family=Roboto:wght@400;500&display=swap" rel="stylesheet">
+    <style>
+        /* General Reset */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        /* Body Styling */
+        body {
+            font-family: 'Lato', sans-serif;
+            background-color: #f8f9fa;
+            color: #343a40;
+            margin: 0;
+            padding: 0;
+            line-height: 1.6;
+        }
+
+        /* Header Styling */
+        header {
+            text-align: center;
+            padding: 3rem 0;
+            background-color: #ffffff;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+        }
+
+        header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        header p {
+            color: #6c757d;
+        }
+
+        /* Section Styling */
+        section {
+            padding: 2rem;
+            margin: 2rem auto;
+            max-width: 800px;
+            background-color: #ffffff;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            opacity: 0; /* For fade-in effect */
+            transform: translateY(20px); /* For fade-in effect */
+            transition: opacity 0.4s ease-out, transform 0.4s ease-out; /* Smooth fade-in */
+        }
+
+        section.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        section h2 {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+            border-bottom: 2px solid #eee;
+            padding-bottom: 0.5rem;
+        }
+
+        section p {
+            margin-bottom: 1rem;
+        }
+
+        ul {
+            list-style-type: none;
+            padding-left: 0;
+        }
+
+        li {
+            margin-bottom: 0.75rem;
+        }
+
+        /* Link Styling */
+        a {
+            color: #007bff; /* Accent color */
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+
+        /* Footer Styling */
+        footer {
+            text-align: center;
+            padding: 2rem 0;
+            color: #6c757d;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header Section -->
+    <header>
+        <h1>Cybersecurity Threats Visualization</h1>
+        <p>By Bhavi Kenia</p>
+    </header>
+
+    <!-- Background Section -->
+    <section id="background">
+        <h2>Background and Motivation</h2>
+        <p>Cybersecurity is a growing global concern, with increasing incidents affecting various industries and causing significant financial losses.</p>
+        <p>I chose this project because I want to visualize cybersecurity threats over time and gain insights from any specific patterns that I discover through the visualization process.</p>
+    </section>
+
+    <!-- Objectives Section -->
+    <section id="objectives">
+        <h2>Project Objectives</h2>
+        <ul>
+            <li>Analyze trends in cybersecurity threats across different industries.</li>
+            <li>Examine financial impacts of security breaches globally.</li>
+            <li>Identify common vulnerabilities and defense mechanisms.</li>
+            <li>Visualize the global distribution of cybersecurity threats.</li>
+        </ul>
+    </section>
+
+    <!-- Data Section -->
+    <section id="data">
+        <h2>Data</h2>
+        <p>The dataset contains global cybersecurity threats from 2015-2024, including information on country, year, attack type, target industry, financial loss, number of affected users, attack source, security vulnerability, defense mechanism, and resolution time.</p>
+        <p><a href="https://www.kaggle.com/datasets/atharvasoundankar/global-cybersecurity-threats-2015-2024/data?select=Global_Cybersecurity_Threats_2015-2024.csv" target="_blank">Access Dataset</a></p>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <p>© 2025 Bhavi Kenia</p>
+    </footer>
+
+    <!-- JavaScript for Fade-In Effect -->
+    <script>
+      document.addEventListener('DOMContentLoaded', function() {
+          const sections = document.querySelectorAll('section');
+
+          function checkVisibility() {
+              sections.forEach(section => {
+                  const rect = section.getBoundingClientRect();
+                  const isVisible = rect.top >= -100 && rect.bottom <= window.innerHeight + 100;
+
+                  if (isVisible && !section.classList.contains('visible')) {
+                      section.classList.add('visible');
+                  }
+              });
+          }
+
+          window.addEventListener('scroll', checkVisibility);
+          checkVisibility(); // Initial check
+      });
+    </script>
+</body>
 </html>
+
