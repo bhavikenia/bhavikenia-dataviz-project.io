@@ -1,118 +1,13 @@
-<!-- <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Global Security Threats Visualization</title>
-    <style>
-        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap');
-        
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-        
-        body {
-            font-family: 'Inter', sans-serif;
-            background: linear-gradient(to right, #548f72, #548f72);
-            color: #fff;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            min-height: 100vh;
-        }
-        
-        .container {
-            width: 80%;
-            max-width: 900px;
-            background: rgba(255, 255, 255, 0.1);
-            padding: 40px;
-            border-radius: 15px;
-            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.2);
-            backdrop-filter: blur(10px);
-            text-align: center;
-        }
-        
-        h1 {
-            font-size: 2.5em;
-            margin-bottom: 20px;
-            font-weight: 600;
-        }
-        
-        h2 {
-            margin-top: 30px;
-            font-size: 1.8em;
-            font-weight: 400;
-        }
-        
-        p, li {
-            font-size: 1.2em;
-            line-height: 1.6;
-        }
-        
-        ul {
-            list-style: none;
-            padding: 0;
-        }
-        
-        li {
-            background: rgba(255, 255, 255, 0.2);
-            margin: 10px 0;
-            padding: 12px;
-            border-radius: 8px;
-            transition: 0.3s;
-        }
-        
-        li:hover {
-            background: rgba(255, 255, 255, 0.3);
-        }
-        
-        a {
-            color: #000000;
-            text-decoration: none;
-            font-weight: 600;
-            transition: 0.3s;
-        }
-        
-        a:hover {
-            color: #ffffff;
-            text-decoration: underline;
-        }
-    </style>
-</head>
-<body>
-    <div class="container">
-        <h1>Global Security Threats Visualization</h1>
-        <p><strong>By:</strong> Bhavi Kenia</p>
-        <p><strong>Contact:</strong> <a href="mailto:bckenia@dons.usfca.edu">bckenia@dons.usfca.edu</a></p>
-        
-        <h2>Project Description</h2>
-        <p>Cybersecurity is a growing global concern, with increasing incidents affecting various industries and causing significant financial losses. This project aims to visualize cybersecurity threats over time and identify patterns within the data.</p>
-        
-        <h2>Project Objectives</h2>
-        <ul>
-            <li>Analyze trends in cybersecurity threats across different industries.</li>
-            <li>Examine the financial impact of security breaches globally.</li>
-            <li>Identify common vulnerabilities and defense mechanisms.</li>
-            <li>Visualize the global distribution of cybersecurity threats.</li>
-        </ul>
-        
-        <h2>Links</h2>
-        <p><a href="https://github.com/bhavikenia/bhavikenia-dataviz-project.git" target="_blank">GitHub Repository</a></p>
-        <p><a href="https://www.kaggle.com/datasets/atharvasoundankar/global-cybersecurity-threats-2015-2024/data?select=Global_Cybersecurity_Threats_2015-2024.csv" target="_blank">Dataset</a></p>
-    </div>
-</body>
-</html> -->
-
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cybersecurity Visualization</title>
     <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700&family=Roboto:wght@400;500&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700&family=Roboto:wght@400;500&display=swap"
+        rel="stylesheet">
     <style>
         /* General Reset */
         * {
@@ -156,9 +51,12 @@
             background-color: #ffffff;
             border-radius: 8px;
             box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-            opacity: 0; /* For fade-in effect */
-            transform: translateY(20px); /* For fade-in effect */
-            transition: opacity 0.4s ease-out, transform 0.4s ease-out; /* Smooth fade-in */
+            opacity: 0;
+            /* For fade-in effect */
+            transform: translateY(20px);
+            /* For fade-in effect */
+            transition: opacity 0.4s ease-out, transform 0.4s ease-out;
+            /* Smooth fade-in */
         }
 
         section.visible {
@@ -188,7 +86,8 @@
 
         /* Link Styling */
         a {
-            color: #007bff; /* Accent color */
+            color: #007bff;
+            /* Accent color */
             text-decoration: none;
             font-weight: bold;
         }
@@ -203,8 +102,65 @@
             padding: 2rem 0;
             color: #6c757d;
         }
+
+        /* Graph Styles */
+        #graph {
+            font-family: sans-serif;
+            background-color: #f9f9f9;
+        }
+
+        #graph .line {
+            fill: none;
+            stroke-width: 2.5px;
+        }
+
+        #graph .legend {
+            font-size: 12px;
+        }
+
+        #graph h2 {
+            text-align: center;
+            color: #333;
+        }
+
+        /* Chart Styles */
+        #chart {
+            font-family: sans-serif;
+            background: #f9f9f9;
+            margin: 20px auto;
+            /* Keep auto margins for centering the section itself */
+            display: flex;
+            /* Enable flexbox */
+            justify-content: center;
+            /* Center horizontally */
+            align-items: center;
+            /* Center vertically */
+            min-height: 600px;
+            /* Ensure the section is tall enough */
+            position: relative;
+        }
+
+        #chart .tile {
+            stroke: #ccc;
+            stroke-width: 1px;
+        }
+
+        #chart .axis-label {
+            font-size: 12px;
+            fill: #333;
+        }
+
+        #chart h2 {
+            text-align: center;
+            color: #333;
+            position: absolute;
+            top: 10px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
     </style>
 </head>
+
 <body>
     <!-- Header Section -->
     <header>
@@ -215,8 +171,10 @@
     <!-- Background Section -->
     <section id="background">
         <h2>Background and Motivation</h2>
-        <p>Cybersecurity is a growing global concern, with increasing incidents affecting various industries and causing significant financial losses.</p>
-        <p>I chose this project because I want to visualize cybersecurity threats over time and gain insights from any specific patterns that I discover through the visualization process.</p>
+        <p>Cybersecurity is a growing global concern, with increasing incidents affecting various industries and causing
+            significant financial losses.</p>
+        <p>I chose this project because I want to visualize cybersecurity threats over time and gain insights from any
+            specific patterns that I discover through the visualization process.</p>
     </section>
 
     <!-- Objectives Section -->
@@ -233,8 +191,273 @@
     <!-- Data Section -->
     <section id="data">
         <h2>Data</h2>
-        <p>The dataset contains global cybersecurity threats from 2015-2024, including information on country, year, attack type, target industry, financial loss, number of affected users, attack source, security vulnerability, defense mechanism, and resolution time.</p>
-        <p><a href="https://www.kaggle.com/datasets/atharvasoundankar/global-cybersecurity-threats-2015-2024/data?select=Global_Cybersecurity_Threats_2015-2024.csv" target="_blank">Access Dataset</a></p>
+        <p>The dataset contains global cybersecurity threats from 2015-2024, including information on country, year,
+            attack type, target industry, financial loss, number of affected users, attack source, security
+            vulnerability, defense mechanism, and resolution time.</p>
+        <p><a
+                href="https://www.kaggle.com/datasets/atharvasoundankar/global-cybersecurity-threats-2015-2024/data?select=Global_Cybersecurity_Threats_2015-2024.csv"
+                target="_blank">Access Dataset</a></p>
+    </section>
+
+    <section id="graph">
+        <h2>Trends of Different Attack Types Over Time</h2>
+        <svg width="750" height="500"></svg>
+        <script src="https://d3js.org/d3.v7.min.js"></script>
+        <script>
+            const svg1 = d3.select("#graph svg"),
+                margin1 = {
+                    top: 50,
+                    right: 150,
+                    bottom: 50,
+                    left: 60
+                },
+                width1 = +svg1.attr("width") - margin1.left - margin1.right,
+                height1 = +svg1.attr("height") - margin1.top - margin1.bottom;
+
+            const g1 = svg1.append("g").attr("transform", `translate(${margin1.left},${margin1.top})`);
+
+            const color1 = d3.scaleOrdinal(d3.schemeCategory10);
+
+            // Load the CSV data
+            d3.csv("https://gist.githubusercontent.com/bhavikenia/ddd1d445fdec0b82658516170bcb56e4/raw/eeff0f9826e7bb9a071a0a0d9e209f8ffdc035a7/cyberdata.csv").then(data => {
+                // Convert Year to number
+                data.forEach(d => {
+                    d.Year = +d.Year;
+                });
+
+                // Group data by AttackType and Year
+                const nestedData = d3.groups(data, d => d.AttackType, d => d.Year);
+
+                // Convert nested data to desired format
+                const attackTypes = nestedData.map((
+                    [attackType, years]) => {
+                    return {
+                        attackType: attackType,
+                        values: years.map((
+                            [year, records]) => ({
+                            year: +year,
+                            count: records.length // Calculate count for each year
+                        })).sort((a, b) => a.year - b.year) // Sort by year
+                    };
+                });
+
+                // Define scales
+                const xScale1 = d3.scaleLinear()
+                    .domain(d3.extent(data, d => d.Year))
+                    .range([0, width1]);
+
+                const yScale1 = d3.scaleLinear()
+                    .domain([0, d3.max(attackTypes, d => d3.max(d.values, v => v.count))])
+                    .range([height1, 0]);
+
+                // Add axes
+                g1.append("g")
+                    .attr("transform", `translate(0,${height1})`)
+                    .call(d3.axisBottom(xScale1).tickFormat(d3.format("d")))
+                    .append("text")
+                    .attr("x", width1 / 2)
+                    .attr("y", margin1.bottom - 10)
+                    .attr("text-anchor", "middle")
+                    .attr("font-size", "12px")
+                    .attr("fill", "black")
+                    .text("Year");
+
+                g1.append("g")
+                    .call(d3.axisLeft(yScale1))
+                    .append("text")
+                    .attr("transform", "rotate(-90)")
+                    .attr("y", 0 - margin1.left)
+                    .attr("x", 0 - (height1 / 2))
+                    .attr("dy", "1em")
+                    .attr("text-anchor", "middle")
+                    .attr("font-size", "12px")
+                    .attr("fill", "black")
+                    .text("Number of Attacks");
+
+                // Define line generator
+                const line1 = d3.line()
+                    .x(d => xScale1(d.year))
+                    .y(d => yScale1(d.count));
+
+                // Draw lines
+                g1.selectAll(".line")
+                    .data(attackTypes)
+                    .enter()
+                    .append("path")
+                    .attr("class", "line")
+                    .attr("d", d => line1(d.values))
+                    .attr("stroke", d => color1(d.attackType));
+
+                // Add legend
+                const legend1 = svg1.append("g")
+                    .attr("transform", `translate(${width1 + margin1.left + 20}, ${margin1.top})`);
+
+                attackTypes.forEach((d, i) => {
+                    const legendRow = legend1.append("g")
+                        .attr("transform", `translate(0, ${i * 20})`);
+
+                    legendRow.append("rect")
+                        .attr("width", 10)
+                        .attr("height", 10)
+                        .attr("fill", color1(d.attackType));
+
+                    legendRow.append("text")
+                        .attr("x", 15)
+                        .attr("y", 10)
+                        .text(d.attackType);
+                });
+
+            }).catch(error => {
+                console.error('Error loading the data:', error);
+            });
+        </script>
+    </section>
+
+    <section id="chart">
+        <h2>Attack Impact by Industry</h2>
+        <svg width="700" height="500"></svg>
+        <script src="https://d3js.org/d3.v7.min.js"></script>
+        <script>
+            const width2 = 700,
+                height2 = 600;
+            const margin2 = {
+                top: 50,
+                right: 50,
+                bottom: 120,
+                left: 120
+            };
+
+            const svg2 = d3.select("#chart svg")
+                .attr("width", width2)
+                .attr("height", height2);
+
+            const industries = ["Healthcare", "Government", "Retail", "Education"]; // Define industries to display
+
+            const xScale2 = d3.scaleBand()
+                .domain(industries)
+                .range([margin2.left, width2 - margin2.right])
+                .padding(0.15);
+
+            const industryColor = d3.scaleOrdinal()
+                .domain(industries)
+                .range(["#e41a1c", "#377eb8", "#4daf4a", "#984ea3"]); // Distinct colors for industries
+
+            d3.csv("https://gist.githubusercontent.com/bhavikenia/ddd1d445fdec0b82658516170bcb56e4/raw/d64e2b135844478c9bf98d8bfc171791d2a4ce1f/cyberdata.csv").then(data => {
+                // Parse numeric values
+                data.forEach(d => {
+                    d["Number of Affected Users"] = +d["Number of Affected Users"];
+                    d["Financial Loss (in Million $)"] = +d["Financial Loss (in Million $)"];
+                    d["Incident Resolution Time (in Hours)"] = +d["Incident Resolution Time (in Hours)"];
+                });
+
+                const yScale2 = d3.scaleBand()
+                    .domain(Array.from(new Set(data.map(d => d.AttackType))))
+                    .range([margin2.top, height2 - margin2.bottom])
+                    .padding(0.1);
+
+                const colorScale = d3.scaleSequential(d3.interpolateGreens)
+                    .domain([0, d3.max(data, d => d["Number of Affected Users"])]);
+
+                const xAxis2 = d3.axisBottom(xScale2);
+                const yAxis2 = d3.axisLeft(yScale2);
+
+                svg2.append("g")
+                    .attr("transform", `translate(0, ${height2 - margin2.bottom})`)
+                    .call(xAxis2)
+                    .selectAll("text")
+                    .append("text")
+                    .attr("x", width2 / 2 - margin2.left)
+                    .attr("y", margin2.bottom + 40)
+                    .attr("text-anchor", "middle")
+                    .attr("font-size", "12px")
+                    .attr("fill", "black")
+                    .text("Industry");
+
+                svg2.append("g")
+                    .attr("transform", `translate(${margin2.left}, 0)`)
+                    .call(yAxis2)
+                    .append("text")
+                    .attr("transform", "rotate(-90)")
+                    .attr("y", 0 - margin2.left)
+                    .attr("x", 0 - (height2 / 2))
+                    .attr("dy", "1em")
+                    .attr("text-anchor", "middle")
+                    .attr("font-size", "12px")
+                    .attr("fill", "black")
+                    .text("Attack Type");
+
+                // Group tiles by industry
+                const industryGroups = svg2.selectAll(".industry-group")
+                    .data(industries)
+                    .enter().append("g")
+                    .attr("class", "industry-group")
+                    .attr("transform", d => `translate(${xScale2(d)},0)`);
+
+                industryGroups.each(function (industry) {
+                    d3.select(this).selectAll(".tile")
+                        .data(data.filter(d => d.Industry === industry))
+                        .enter().append("rect")
+                        .attr("class", "tile")
+                        .attr("y", d => yScale2(d.AttackType))
+                        .attr("width", xScale2.bandwidth())
+                        .attr("height", yScale2.bandwidth())
+                        .style("fill", d => colorScale(d["Number of Affected Users"]))
+                });
+
+                // Add color legend
+                const legendWidth = 200;
+                const legendHeight = 10;
+
+                const legendScale = d3.scaleLinear()
+                    .domain([0, d3.max(data, d => d["Number of Affected Users"])])
+                    .range([0, legendWidth]);
+
+                const legendAxis = d3.axisBottom(legendScale)
+                    .ticks(5);
+
+                const legend = svg2.append("g")
+                    .attr("transform", `translate(${width2 - margin2.right - legendWidth}, ${height2 - margin2.bottom + 70})`);
+
+                const defs = svg2.append("defs");
+                const linearGradient = defs.append("linearGradient")
+                    .attr("id", "linear-gradient");
+
+                linearGradient.selectAll("stop")
+                    .data([{
+                        offset: "0%",
+                        color: colorScale(0)
+                    }, {
+                        offset: "100%",
+                        color: colorScale(d3.max(data, d => d["Number of Affected Users"]))
+                    }])
+                    .enter().append("stop")
+                    .attr("offset", d => d.offset)
+                    .attr("stop-color", d => d.color);
+
+                legend.append("rect")
+                    .attr("width", legendWidth)
+                    .attr("height", legendHeight)
+                    .style("fill", "url(#linear-gradient)");
+
+                legend.append("g")
+                    .attr("transform", `translate(0, ${legendHeight})`)
+                    .call(legendAxis);
+
+                legend.append("text")
+                    .attr("x", legendWidth / 2)
+                    .attr("y", legendHeight + 40)
+                    .attr("text-anchor", "middle")
+                    .text("Number of Affected Users");
+
+                // Add chart title
+                svg2.append("text")
+                    .attr("x", width2 / 2)
+                    .attr("y", margin2.top / 2)
+                    .attr("text-anchor", "middle")
+                    .style("font-size", "16px")
+                    .style("font-weight", "bold")
+            });
+        </script>
     </section>
 
     <!-- Footer -->
@@ -244,24 +467,24 @@
 
     <!-- JavaScript for Fade-In Effect -->
     <script>
-      document.addEventListener('DOMContentLoaded', function() {
-          const sections = document.querySelectorAll('section');
+        document.addEventListener('DOMContentLoaded', function () {
+            const sections = document.querySelectorAll('section');
 
-          function checkVisibility() {
-              sections.forEach(section => {
-                  const rect = section.getBoundingClientRect();
-                  const isVisible = rect.top >= -100 && rect.bottom <= window.innerHeight + 100;
+            function checkVisibility() {
+                sections.forEach(section => {
+                    const rect = section.getBoundingClientRect();
+                    const isVisible = rect.top >= -100 && rect.bottom <= window.innerHeight + 100;
 
-                  if (isVisible && !section.classList.contains('visible')) {
-                      section.classList.add('visible');
-                  }
-              });
-          }
+                    if (isVisible && !section.classList.contains('visible')) {
+                        section.classList.add('visible');
+                    }
+                });
+            }
 
-          window.addEventListener('scroll', checkVisibility);
-          checkVisibility(); // Initial check
-      });
+            window.addEventListener('scroll', checkVisibility);
+            checkVisibility(); // Initial check
+        });
     </script>
 </body>
-</html>
 
+</html>
