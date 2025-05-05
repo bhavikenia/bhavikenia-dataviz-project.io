@@ -4,12 +4,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cybersecurity Visualization</title>
+    <title>Cybersecurity Threats on a National Level</title>
     <script src="https://d3js.org/d3.v7.min.js"></script>
+    <script src="https://d3-legend.susielu.com/d3-legend.min.js"></script>
+    <script src="https://unpkg.com/scrollama"></script>
 
     <link href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700&family=Roboto:wght@400;500&display=swap"
         rel="stylesheet">
     <style>
+        
         /* General Reset */
         * {
             margin: 0;
@@ -19,7 +22,7 @@
 
         /* Body Styling */
         body {
-            font-family: 'Lato', sans-serif; /* Use Lato as primary */
+            font-family: 'Lato', sans-serif; 
             background-color: #f8f9fa;
             color: #343a40;
             margin: 0;
@@ -41,6 +44,7 @@
         }
 
         header p {
+            font-size: 1.5rem;
             color: #6c757d;
         }
 
@@ -85,7 +89,7 @@
 
         section h2,
         .chart-section h1 { /* Style chart titles like section titles */
-            font-size: 2rem;
+            font-size: 2.2rem;
             margin-bottom: 1.5rem; /* Increased margin */
             border-bottom: 2px solid #eee;
             padding-bottom: 0.5rem;
@@ -95,16 +99,8 @@
         }
 
         section p {
+            font-size: 1.3rem;
             margin-bottom: 1rem;
-        }
-
-        ul {
-            list-style-type: none;
-            padding-left: 0;
-        }
-
-        li {
-            margin-bottom: 0.75rem;
         }
 
         /* Link Styling */
@@ -151,56 +147,18 @@
             stroke-width: 2.5px;
         }
 
-        #lineChartContainer .legend { /* Target legend within the container */
-            font-size: 12px;
+        #lineChartContainer .tick text {
+            font-size: 14px; 
         }
-        #lineChartContainer .axis-label { /* Consistent axis label style */
-             font-size: 12px;
-             fill: #333;
-        }
-         #lineChart { /* Style SVG directly if needed */
-             font-family: sans-serif;
-             background-color: #f9f9f9; /* Added from original */
-         }
 
         /* Heatmap Styles */
-         #heatmapContainer {
-             position: relative;
-             min-height: 600px; /* Ensure space */
-         }
-         #heatmap { /* Style the div container */
-            font-family: sans-serif;
-            background: #f9f9f9;
-            margin: 20px auto; /* Keep auto margins for centering the section itself */
-            display: flex; /* Enable flexbox */
-            justify-content: center; /* Center horizontally */
-            align-items: center; /* Center vertically */
-            position: relative; /* Required if title was absolutely positioned */
-         }
-        #heatmapContainer .tile { /* Target tiles within the container */
-            stroke: #ccc;
-            stroke-width: 1px;
-            cursor: pointer;
+        #heatmapContainer {
+            position: relative;
+            min-height: 600px; /* Ensure space */
         }
-        #heatmapContainer .axis-label { /* Consistent axis label style */
-             font-size: 12px;
-             fill: #333;
-        }
-        #heatmapContainer .legend-label {
-             font-size: 12px;
-             fill: #333;
-             text-anchor: middle;
-        }
-
-        /* Map Styles */
-        #mapContainer svg { /* Center map svg */
-          display: block;
-          margin: 0 auto;
-        }
-        #mapContainer path { /* Style map paths */
-             /* fill handled by d3 */
-             stroke: #888;
-             stroke-width: 0.5;
+       
+        #heatmapContainer .tick text {
+            font-size: 13.5px;
         }
 
         /* Bubble Chart Styles */
@@ -209,12 +167,12 @@
            margin: 0 auto;
         }
         #bubbleContainer circle { /* Style bubbles */
-           stroke: #333;
+           stroke: #000000;
            stroke-width: 1;
         }
         #bubbleContainer text { /* Style bubble labels */
-            font-size: 10px;
-            fill: #222;
+            font-size: 16px;
+            fill: #000000;
             text-anchor: middle;
             pointer-events: none; /* Prevent labels from interfering with mouse events */
         }
@@ -224,246 +182,78 @@
 
 <body>
     <header>
-        <h1>Cybersecurity Threats Visualization</h1>
-        <p>By Bhavi Kenia</p>
+        <h1>Cybersecurity Threats on a National Level</h1>
+        <p>By: Bhavi Kenia</p>
     </header>
-
-    <section id="background">
-        <h2>Background and Motivation</h2>
+    
+    <!-- Scroll steps -->
+    <div class="steps">
+        <section class="step" data-step="0">
+        <h2>Introduction</h2>
         <p>Cybersecurity is a growing global concern, with increasing incidents affecting various industries and causing
             significant financial losses.</p>
-        <p>I chose this project because I want to visualize cybersecurity threats over time and gain insights from any
-            specific patterns that I discover through the visualization process.</p>
-    </section>
+        <p>Visualizing cybersecurity threats over time and gaining insights from any
+            specific patterns from the data is essential because these threats are real and some of the 
+            conclusive data is surprising.</p>
+        </section>
 
-    <section id="data">
-        <h2>Data</h2>
-        <p>The dataset contains global cybersecurity threats from 2015-2024, including information on country, year,
-            attack type, target industry, financial loss, number of affected users, attack source, security
-            vulnerability, defense mechanism, and resolution time.</p>
-        <p>The visualizations below use data derived from the following source:</p>
-        <p><a
-                href="https://www.kaggle.com/datasets/atharvasoundankar/global-cybersecurity-threats-2015-2024/data?select=Global_Cybersecurity_Threats_2015-2024.csv"
-                target="_blank">Access Dataset</a></p>
-    </section>
-
-    <div class="chart-section" id="lineChartContainer">
-        <h1>Trends of Different Attack Types Over Time</h1>
-        <svg id="lineChart" width="900" height="500"></svg>
+        <section class="step" data-step="1">
+        <p>The heat map displays industries and attack types in a grid, with color intensity indicating the severity of the 
+            impact. Darker colors show higher impact and lighter colors show less impact.</p>
+        </section>
+        <div class="chart-section step" id="heatmapContainer">
+            <h1>Cyber Attack Impact by Industry</h1>
+            <div id="heatmap"></div>
         </div>
 
-    <div class="chart-section" id="heatmapContainer">
-        <h1>Cyber Attack Impact by Industry</h1>
-        <div id="heatmap"></div>
-         </div>
-
-    <div class="chart-section" id="mapContainer">
-        <h1>Cybersecurity Threats by Country</h1>
-        <div id="map"></div>
+        <section class="step" data-step="2">
+        <p>The multi-line chart tracks attack trends over time, using lines to represent different attack types, with the 
+            x-axis as years and the y-axis as attack frequency.
+        </p>
+        </section>
+        <div class="chart-section step" id="lineChartContainer">
+            <h1>Trends of Different Attack Types Over Time</h1>
+            <svg id="lineChart" width="900" height="500"></svg>
         </div>
 
-     <div class="chart-section" id="bubbleContainer">
-        <h1>Financial Impact and Scale of Cyber Attack Types</h1>
-        <div id="bubbleChart">
-             <svg id="bubbleSvg" width="960" height="700"></svg>
+        <section class="step" data-step="3">
+        <p>Color-coded map of the world, with countries shaded based on attack frequency and severity, highlighting regional 
+            cybersecurity trends and risks.</p>
+        </section>
+        <div class="chart-section step" id="mapContainer">
+            <h1>Cybersecurity Threats by Country</h1>
+            <div id="map"></div>
         </div>
+
+        <section class="step" data-step="4">
+        <p>The bubble chart uses bubbles to represent different attack types, with size indicating financial loss and 
+            color representing the number of affected users.
+        </p>
+        </section>
+        <div class="chart-section step" id="bubbleContainer">
+            <h1>Financial Impact and Scale of Cyber Attack Types</h1>
+            <div id="bubbleChart">
+            <svg id="bubbleSvg" width="960" height="700"></svg>
+            </div>
+        </div>
+
+        <section id="data">
+            <h2>Data</h2>
+            <p>The dataset contains global cybersecurity threats from 2015-2024, including information on country, year,
+                attack type, target industry, financial loss, number of affected users, attack source, security
+                vulnerability, defense mechanism, and resolution time.</p>
+            <p>The visualizations above use data derived from the following source:</p>
+            <p><a
+                    href="https://www.kaggle.com/datasets/atharvasoundankar/global-cybersecurity-threats-2015-2024/data?select=Global_Cybersecurity_Threats_2015-2024.csv"
+                    target="_blank">Access Dataset</a></p>
+        </section>
     </div>
 
-    <div class="tooltip" id="tooltip"></div>
-
-    <footer>
-        <p>© 2025 Bhavi Kenia</p>
-    </footer>
-
-    <script>
-        document.addEventListener('DOMContentLoaded', function () {
-            // Apply fade-in to both sections and chart-sections
-            // Looked online on how to do this part
-            const elementsToFade = document.querySelectorAll('section, .chart-section');
-
-            function checkVisibility() {
-                elementsToFade.forEach(el => {
-                    const rect = el.getBoundingClientRect();
-                    // Adjust visibility check bounds if needed
-                    const isVisible = rect.top < window.innerHeight && rect.bottom >= 0;
-
-                    if (isVisible && !el.classList.contains('visible')) {
-                        el.classList.add('visible');
-                    }
-                });
-            }
-
-            window.addEventListener('scroll', checkVisibility);
-            checkVisibility(); // Initial check
-        });
-    </script>
-
-    <script>
-        // Sets up SVG and chart dimensions
-        const lineChartContainer = d3.select("#lineChartContainer");
-        const svg1 = d3.select("#lineChart");
-
-        function resizeLineChart() {
-            const containerWidth = lineChartContainer.node().getBoundingClientRect().width;
-            svg1.attr("width", containerWidth);
-
-            const margin1 = { top: 50, right: 150, bottom: 50, left: 60 };
-            const width1 = containerWidth - margin1.left - margin1.right;
-            const height1 = +svg1.attr("height") - margin1.top - margin1.bottom;
-
-            // Clear the existing chart elements
-            svg1.selectAll("*").remove();
-            // Appends group to SVG and translate it by margins
-            const g = svg1.append("g").attr("transform", "translate(" + margin1.left + "," + margin1.top + ")");
-
-            // Defines color scheme for the lines
-            const pastelColors = [
-                "#c51b8a", "#99d8c9", "#fa9fb5", "#2b8cbe"
-            ];
-            const color = d3.scaleOrdinal().range(pastelColors);
-            // Selects tooltip div
-            const tooltip = d3.select("#tooltip");
-
-            // Loads data from external CSV
-            d3.csv("https://gist.githubusercontent.com/bhavikenia/80e10214f5e2b8dca8c69acf96a1924e/raw/e09d95e88ed244a7b7bf21ee4196a6989b7e7560/cyberdata2.csv").then(function (data) {
-                // Convert Year to number
-                data.forEach(function (d) { d.Year = +d.Year; });
-                // Groups data by AttackType and Year
-                const nestedData = d3.groups(data, function (d) { 
-                    return d.AttackType; 
-                }, function (d) { 
-                    return d.Year; 
-                });
-
-                // Transforms nested data to structure needed for plotting
-                // Looked online on how to do this part
-                const attackTypes = nestedData.map(function (entry) {
-                    const attackType = entry[0];
-                    const years = entry[1];
-                    return {
-                        attackType: attackType,
-                        values: years.map(function (yearGroup) {
-                            return { year: +yearGroup[0], count: yearGroup[1].length };
-                        }).sort(function (a, b) { return a.year - b.year; })
-                    };
-                });
-
-                // Defines x-scale based on Year
-                const xScale = d3.scaleLinear()
-                    .domain(d3.extent(data, function (d) { return d.Year; }))
-                    .range([0, width1]); // Use width1 here
-
-                // Defines y-scale based on max number of attacks
-                const yScale = d3.scaleLinear()
-                    .domain([0, d3.max(attackTypes, function (d) { return d3.max(d.values, function (v) { return v.count; }); })])
-                    .range([height1, 0]);
-
-                // Adds X axis with labels
-                g.append("g")
-                    .attr("transform", "translate(0," + height1 + ")")
-                    .call(d3.axisBottom(xScale).tickFormat(d3.format("d")))
-                    .append("text")
-                    .attr("x", width1 / 2)
-                    .attr("y", margin1.bottom - 10)
-                    .attr("text-anchor", "middle")
-                    .attr("font-size", "12px")
-                    .attr("fill", "black")
-                    .text("Year");
-
-                // Adds Y axis with labels
-                g.append("g")
-                    .call(d3.axisLeft(yScale))
-                    .append("text")
-                    .attr("transform", "rotate(-90)")
-                    .attr("y", 0 - margin1.left)
-                    .attr("x", 0 - (height1 / 2))
-                    .attr("dy", "1em")
-                    .attr("text-anchor", "middle")
-                    .attr("font-size", "12px")
-                    .attr("fill", "black")
-                    .text("Number of Attacks");
-
-                // Defines line generator
-                const line = d3.line()
-                    .x(function (d) { 
-                        return xScale(d.year); 
-                    })
-                    .y(function (d) { 
-                        return yScale(d.count); 
-                    });
-
-                // Draws lines for each attack type
-                g.selectAll(".line")
-                    .data(attackTypes)
-                    .enter()
-                    .append("path")
-                    .attr("class", "line")
-                    .attr("stroke", function (d) { 
-                        return color(d.attackType); 
-                    })
-                    .attr("d", function (d) { 
-                        return line(d.values); 
-                    });
-
-                // Add dots for each data point and tooltip interactivity
-                // Looked online on how to do this part
-                attackTypes.forEach(function (attack) {
-                    g.selectAll(".dot-" + attack.attackType.replace(/\s+/g, "-"))
-                        .data(attack.values)
-                        .enter()
-                        .append("circle")
-                        .attr("class", "dot")
-                        .attr("cx", function (d) { 
-                            return xScale(d.year); 
-                        })
-                        .attr("cy", function (d) { 
-                            return yScale(d.count); 
-                        })
-                        .attr("r", 4)
-                        .attr("fill", color(attack.attackType))
-                        .on("mouseover", function (event, d) {
-                            tooltip.transition().duration(150).style("opacity", 1);
-                            tooltip.html("<strong>" + attack.attackType + "</strong><br>Year: " + d.year + "<br>Attacks: " + d.count)
-                                .style("left", (event.pageX + 10) + "px")
-                                .style("top", (event.pageY - 28) + "px");
-                        })
-                        .on("mousemove", function(event) {
-                            tooltip.style("left", (event.pageX + 10) + "px")
-                                .style("top", (event.pageY - 28) + "px");
-                        })
-                        .on("mouseout", function () {
-                            tooltip.transition().duration(200).style("opacity", 0);
-                        });
-                });
-                // Creates a legend to label each line
-                const legend = svg1.append("g")
-                    .attr("transform", "translate(" + (width1 + margin1.left + 20) + ", " + margin1.top + ")");
-
-                // Adds color boxes and labels for each attack type
-                // Looked online on how to do this part
-                attackTypes.forEach(function (d, i) {
-                    const legendRow = legend.append("g")
-                        .attr("transform", "translate(0, " + (i * 20) + ")")
-                        .attr("class", "legend");
-
-                    legendRow.append("rect")
-                        .attr("width", 10)
-                        .attr("height", 10)
-                        .attr("fill", color(d.attackType));
-
-                    legendRow.append("text")
-                        .attr("x", 15)
-                        .attr("y", 10)
-                        .attr("alignment-baseline", "middle")
-                        .text(d.attackType);
-                });
-            });
-        }
-        // Call the function on initial load
-        // Had to search online on how to do this part
-        resizeLineChart();
-        window.addEventListener('resize', resizeLineChart);
-    </script>
+    <div class="tooltip" id="tooltip-lineChart"></div>
+    <div class="tooltip" id="tooltip-heatmap"></div>
+    <div class="tooltip" id="tooltip-map"></div>
+    <div class="tooltip" id="tooltip-bubble"></div>
+    
 
     <script>
         // Sets dimensions for the SVG
@@ -491,7 +281,7 @@
             .range(["#f0f9e8", "#bae4bc", "#7bccc4", "#2b8cbe"]);
 
         // Selects tooltip div
-        const tooltipHeatmap = d3.select("#tooltip"); // Use shared tooltip ID
+        const tooltipHeatmap = d3.select("#tooltip-heatmap");
 
         // Loads data from CSV file
         d3.csv("https://gist.githubusercontent.com/bhavikenia/ddd1d445fdec0b82658516170bcb56e4/raw/730a0bc8153f5542b267130be6e5b2515a1a1541/cyberdata.csv").then(function(data) {
@@ -503,8 +293,8 @@
                 d["Incident Resolution Time (in Hours)"] = +d["Incident Resolution Time (in Hours)"];
             });
 
-             // Creates y-axis scale for attack types 
-             var yScale = d3.scaleBand()
+            // Creates y-axis scale for attack types 
+            var yScale = d3.scaleBand()
                 .domain(Array.from(new Set(data.map(function(d) {
                     return d.AttackType;
                 }))))
@@ -582,202 +372,299 @@
 
                     // Moves tooltip with mouse
                     .on("mousemove", function(event) {
-                         tooltipHeatmap // Use shared tooltip
+                        tooltipHeatmap // Use shared tooltip
                             .style("left", (event.pageX + 15) + "px") 
                             .style("top", (event.pageY - 28) + "px"); 
                     })
 
                     // Hides tooltip on mouseout
                     .on("mouseout", function() {
-                         tooltipHeatmap.style("display", "none"); 
+                        tooltipHeatmap.style("display", "none"); 
                         d3.select(this).attr("stroke", "none"); 
                     })
-
-                    // Highlights selected tile on click 
-                    .on("click", function(event) {
-                        d3.selectAll(".tile").style("opacity", 0.2); 
-                        d3.select(this)
-                            .style("opacity", 1) 
-                            .attr("stroke", "#000")
-                            .attr("stroke-width", 2);
-                    });
             });
 
-            // Sets dimensions for legend
-            var legendWidth = 200;
-            var legendHeight = 10;
+            // Add a legend using d3-legend
+            var legendColor = d3.legendColor()
+                .shapeWidth(40)             
+                .shapeHeight(10)
+                .shapePadding(80)           
+                .orient("horizontal")
+                .labelFormat(d3.format(".2s")) 
+                .cells(5)                   
+                .scale(colorScale);        
 
-            // Scales for the legend based on affected users 
-            var legendScale = d3.scaleLinear()
-                .domain([0, d3.max(data, function(d) {
-                    return d["Number of Affected Users"];
-                })])
-                .range([0, legendWidth]);
+            // Append legend group and call the legend
+            svg.append("g")
+                .attr("class", "legend")
+                .attr("transform", "translate(" + (width / 2 - 180) + "," + (height - margin.bottom + 70) + ")")
+                .call(legendColor);
 
-            // Creates axis for the legend
-            var legendAxis = d3.axisBottom(legendScale)
-                .ticks(5) // Original ticks
-                .tickFormat(d3.format(".2s")); 
-
-            // Appends legend group to SVG
-            var legend = svg.append("g")
-                .attr("transform", "translate(" + (width - margin.right - legendWidth) + "," + (height - margin.bottom + 70) + ")");
-
-            // Defines gradient for legend bar
-            var defs = svg.append("defs");
-            var linearGradient = defs.append("linearGradient")
-                .attr("id", "linear-gradient"); // Original ID
-
-            // Sets gradient stops using min and max values
-            // Looked online on how to do this part
-            linearGradient.selectAll("stop")
-                .data([
-                    // Uses colorScale with min/max values from domain
-                    { offset: "0%", color: colorScale(0) },
-                    { offset: "100%", color: colorScale(d3.max(data, function(d) { return d["Number of Affected Users"]; })) }
-                ])
-                .enter().append("stop")
-                .attr("offset", function(d) {
-                    return d.offset;
-                })
-                .attr("stop-color", function(d) {
-                    return d.color;
-                });
-
-            // Draws legend color bar
-            legend.append("rect")
-                .attr("width", legendWidth)
-                .attr("height", legendHeight)
-                .style("fill", "url(#linear-gradient)"); 
-
-            // Appends axis below the color bar
-            legend.append("g")
-                .attr("transform", "translate(0," + legendHeight + ")") 
-                .call(legendAxis);
-
-            // Adds label below the legend
-            legend.append("text")
-                .attr("x", legendWidth / 2)
-                .attr("y", legendHeight + 40) 
+            // Add label below the legend
+            svg.append("text")
+                .attr("x", width / 2)
+                .attr("y", height - margin.bottom + 120)
                 .attr("text-anchor", "middle")
-                .attr("class", "axis-label") 
+                .attr("class", "axis-label")
                 .text("Number of Affected Users");
+
         }).catch(function (error) {
             // Handles errors in loading CSV
             console.error('Error loading the heatmap data:', error);
-             // Optional: display error message on chart
-             svg.append("text").attr("x", width/2).attr("y", height/2).attr("text-anchor", "middle").text("Error loading data.");
         });
     </script>
 
     <script>
-      // Defines SVG canvas dimensions
-      const widthMap = 960; // Use distinct variable names if needed
-      const heightMap = 600;
+        // Sets up SVG and chart dimensions
+        const lineChartContainer = d3.select("#lineChartContainer");
+        const svg1 = d3.select("#lineChart");
 
-      // Creates an SVG element within the container
-      const svgMap = d3.select("#map")
+        function resizeLineChart() {
+            const containerWidth = lineChartContainer.node().getBoundingClientRect().width;
+            svg1.attr("width", containerWidth);
+
+            const margin1 = { top: 50, right: 150, bottom: 50, left: 60 };
+            const width1 = containerWidth - margin1.left - margin1.right;
+            const height1 = +svg1.attr("height") - margin1.top - margin1.bottom;
+
+            // Appends group to SVG and translate it by margins
+            const g = svg1.append("g").attr("transform", "translate(" + margin1.left + "," + margin1.top + ")");
+
+            // Defines color scheme for the lines
+            const pastelColors = [
+                "#1b9e77", "#d95f02", "#7570b3", "#e7298a"
+            ];
+            const color = d3.scaleOrdinal().range(pastelColors);
+            // Selects tooltip div
+            const tooltip = d3.select("#tooltip-lineChart");
+
+            // Loads data from external CSV
+            d3.csv("https://gist.githubusercontent.com/bhavikenia/80e10214f5e2b8dca8c69acf96a1924e/raw/e09d95e88ed244a7b7bf21ee4196a6989b7e7560/cyberdata2.csv").then(function (data) {
+                // Convert Year to number
+                data.forEach(function (d) { d.Year = +d.Year; });
+                // Groups data by AttackType and Year
+                const nestedData = d3.groups(data, function (d) { 
+                    return d.AttackType; 
+                }, function (d) { 
+                    return d.Year; 
+                });
+
+                // Transforms nested data to structure needed for plotting
+                // Looked online on how to do this part
+                const attackTypes = nestedData.map(function (entry) {
+                    const attackType = entry[0];
+                    const years = entry[1];
+                    return {
+                        attackType: attackType,
+                        values: years.map(function (yearGroup) {
+                            return { year: +yearGroup[0], count: yearGroup[1].length };
+                        }).sort(function (a, b) { return a.year - b.year; })
+                    };
+                });
+
+                // Defines x-scale based on Year
+                const xScale = d3.scaleLinear()
+                    .domain(d3.extent(data, function (d) { return d.Year; }))
+                    .range([0, width1]); // Use width1 here
+
+                // Defines y-scale based on max number of attacks
+                const yScale = d3.scaleLinear()
+                    .domain([0, d3.max(attackTypes, function (d) { return d3.max(d.values, function (v) { return v.count; }); })])
+                    .range([height1, 0]);
+                    
+                // Adds X axis with labels
+                g.append("g")
+                    .attr("transform", "translate(0," + height1 + ")")
+                    .call(d3.axisBottom(xScale).tickFormat(d3.format("d")))
+                    .append("text")
+                    .attr("x", width1 / 2)
+                    .attr("y", margin1.bottom - 10)
+                    .attr("text-anchor", "middle")
+                    .attr("font-size", "17px")
+                    .attr("fill", "black")
+                    .text("Year");
+
+                // Adds Y axis with labels
+                g.append("g")
+                    .call(d3.axisLeft(yScale))
+                    .append("text")
+                    .attr("transform", "rotate(-90)")
+                    .attr("y", 0 - margin1.left)
+                    .attr("x", 0 - (height1 / 2))
+                    .attr("dy", "1em")
+                    .attr("text-anchor", "middle")
+                    .attr("font-size", "17px")
+                    .attr("fill", "black")
+                    .text("Number of Attacks");
+
+                // Defines line generator
+                const line = d3.line()
+                    .x(function (d) { 
+                        return xScale(d.year); 
+                    })
+                    .y(function (d) { 
+                        return yScale(d.count); 
+                    });
+
+                // Draws lines for each attack type
+                g.selectAll(".line")
+                    .data(attackTypes)
+                    .enter()
+                    .append("path")
+                    .attr("class", "line")
+                    .attr("stroke", function (d) { 
+                        return color(d.attackType); 
+                    })
+                    .attr("d", function (d) { 
+                        return line(d.values); 
+                    });
+
+                // Add dots for each data point and tooltip interactivity
+                // Looked online on how to do this part
+                attackTypes.forEach(function (attack) {
+                    g.selectAll(".dot-" + attack.attackType.replace(/\s+/g, "-"))
+                        .data(attack.values)
+                        .enter()
+                        .append("circle")
+                        .attr("class", "dot")
+                        .attr("cx", function (d) { 
+                            return xScale(d.year); 
+                        })
+                        .attr("cy", function (d) { 
+                            return yScale(d.count); 
+                        })
+                        .attr("r", 4)
+                        .attr("fill", color(attack.attackType))
+                        .on("mouseover", function (event, d) {
+                            tooltip.transition().duration(150).style("opacity", 1);
+                            tooltip.html("<strong>" + attack.attackType + "</strong><br>Year: " + d.year + "<br>Attacks: " + d.count)
+                                .style("left", (event.pageX + 10) + "px")
+                                .style("top", (event.pageY - 28) + "px");
+                        })
+                        .on("mousemove", function(event) {
+                            tooltip.style("left", (event.pageX + 10) + "px")
+                                .style("top", (event.pageY - 28) + "px");
+                        })
+                        .on("mouseout", function () {
+                            tooltip.transition().duration(200).style("opacity", 0);
+                        });
+                });
+                // Inbuilt D3 legend
+                const legendOrdinal = d3.legendColor()
+                    .shape("rect")
+                    .shapeWidth(15)
+                    .shapeHeight(15)
+                    .shapePadding(5)
+                    .labelOffset(5)
+                    .scale(color)
+                    .title("Attack Types");
+
+                svg1.append("g")
+                    .attr("class", "legendOrdinal")
+                    .attr("transform", "translate(" + (width1 + margin1.left + 30) + "," + margin1.top + ")")
+                    .call(legendOrdinal);
+            });
+        }
+        // Call the function on initial load
+        // Had to search online on how to do this part
+        resizeLineChart();
+        window.addEventListener('resize', resizeLineChart);
+    </script>
+
+    <script>
+        const widthMap = 960;
+        const heightMap = 600;
+    
+        const svgMap = d3.select("#map")
         .append("svg")
         .attr("width", widthMap)
         .attr("height", heightMap);
-
-      // Defines map projection
-      const projection = d3.geoNaturalEarth1()
+    
+        const projection = d3.geoNaturalEarth1()
         .scale(160)
         .translate([widthMap / 2, heightMap / 2]);
-
-      // Creates a path generator using the projection
-      const path = d3.geoPath().projection(projection);
-
-      // Creates a color scale for threat levels
-      const colorScaleMap = d3.scaleSequential(d3.interpolateReds); // Use distinct variable
-
-      // References to the tooltip element
-      const tooltipMap = d3.select("#tooltip"); // Use shared tooltip ID
-
-      // Loads both the world map and cybersecurity data
-      Promise.all([
+    
+        const path = d3.geoPath().projection(projection);
+    
+        const colorScaleMap = d3.scaleSequential(d3.interpolateReds);
+    
+        const tooltipMap = d3.select("#tooltip-map");
+    
+        Promise.all([
         d3.json("https://raw.githubusercontent.com/holtzy/D3-graph-gallery/master/DATA/world.geojson"),
         d3.csv("https://gist.githubusercontent.com/bhavikenia/ddd1d445fdec0b82658516170bcb56e4/raw/d64e2b135844478c9bf98d8bfc171791d2a4ce1f/cyberdata.csv")
-      ]).then(function (data) {
-        const worldData = data[0];
-        const cyberData = data[1];
-
-        // Aggregates threat data per country
+        ]).then(function ([worldData, cyberData]) {
+    
+        // Aggregate threat data per country
         const countryData = d3.rollup(
-          cyberData,
-          function (rows) {
-            return {
-              // Total number of attacks
-              attackCount: rows.length,
-              totalLoss: d3.sum(rows, function (d) {
-                // Sums financial loss
-                return +d["Financial Loss (in Million $)"];
-              })
-            };
-          },
-          function (d) {
-            // Groups by country name
-            return d.Country;
-          }
+            cyberData,
+            rows => ({
+            attackCount: rows.length,
+            totalLoss: d3.sum(rows, d => +d["Financial Loss (in Million $)"])
+            }),
+            d => d.Country
         );
-
-        // Determines the maximum number of attacks to set color scale
-        const maxAttack = d3.max(Array.from(countryData.values()), function (d) {
-          return d.attackCount;
-        });
-        colorScaleMap.domain([0, maxAttack]); // Set domain for color mapping
-
-        // Draws the map features
-        // Looked online on how to do this part
+    
+        // Determine max attack count for color scale domain
+        const maxAttack = d3.max(Array.from(countryData.values()), d => d.attackCount);
+        colorScaleMap.domain([0, maxAttack]);
+    
+        // Draw countries
         svgMap.append("g")
-          .selectAll("path")
-          // Binds country features
-          .data(worldData.features)
-          .join("path")
-          // Draws each country using the path generator
-          .attr("d", path)
-          .attr("fill", function (d) {
-            const name = d.properties.name;
-            const data = countryData.get(name);
-            // Fills based on attack count
+            .selectAll("path")
+            .data(worldData.features)
+            .join("path")
+            .attr("d", path)
+            .attr("fill", d => {
+            const data = countryData.get(d.properties.name);
             return data ? colorScaleMap(data.attackCount) : "#eee";
-          })
+            })
+            .attr("stroke", "#999")
+            .attr("stroke-width", 0.5)
+            .on("mouseover", function(event, d) {
+            const data = countryData.get(d.properties.name);
+            tooltipMap.style("opacity", 1)
+                .html(
+                `<strong>${d.properties.name}</strong><br>` +
+                `Attacks: ${data ? data.attackCount : 0}<br>` +
+                `Financial Loss: $${data ? data.totalLoss.toFixed(2) : "0.00"}M`
+                );
+            d3.select(this).classed("hovered", true);
+            })
+            .on("mousemove", function(event) {
+            tooltipMap.style("left", (event.pageX + 10) + "px")
+                .style("top", (event.pageY - 28) + "px");
+            })
+            .on("mouseout", function() {
+            tooltipMap.style("opacity", 0);
+            d3.select(this).classed("hovered", false);
+            });
+    
+        // Add legend
+        // If using scaleQuantile:
+        var legendColor = d3.legendColor()
+            .shapeWidth(40)
+            .shapeHeight(10)
+            .cells(5)
+            .orient("horizontal")
+            .labelFormat(d3.format(".2s"))
+            .scale(colorScaleMap);
 
-          // Tooltip interactions
-          // Looked online on how to do this part
-          .on("mouseover", function (event, d) {
-            const name = d.properties.name;
-            const data = countryData.get(name);
+        svgMap.append("g")
+            .attr("class", "legend")
+            .attr("transform", "translate(40,550)") 
+            .call(legendColor);
 
-            // Shows tooltip with country data
-            tooltipMap.style("opacity", 1) // Use shared tooltip
-              .html(
-                "<strong>" + name + "</strong><br>" +
-                "Attacks: " + (data ? data.attackCount : 0) + "<br>" +
-                "Financial Loss: $" + (data ? data.totalLoss.toFixed(2) : "0.00") + "M"
-              )
-              .style("left", (event.pageX + 10) + "px")
-              .style("top", (event.pageY - 28) + "px");
+        // Add label below the legend
+        svgMap.append("text")
+            .attr("x", width / 10)
+            .attr("y", height - margin.bottom + 120)
+            .attr("class", "axis-label")
+            .text("Number of Attacks");
 
-            // Highlights the hovered country
-            d3.select(this).attr("stroke-width", 1.5); 
-          })
-          .on("mousemove", function (event) {
-            // Updates tooltip position during mouse move
-            tooltipMap.style("left", (event.pageX + 10) + "px") // Use shared tooltip
-                   .style("top", (event.pageY - 28) + "px");
-          })
-          .on("mouseout", function () {
-            // Hides tooltip and reset stroke on mouse out
-            // Looked online on how to do this part
-            tooltipMap.style("opacity", 0); // Use shared tooltip
-            d3.select(this).attr("stroke-width", null); 
-          });
-      }).catch(function (error) {
-        // Handles errors in loading CSV
+        }).catch(error => {
         console.error('Error loading the map data:', error);
-    });
+        });
     </script>
 
     <script>
@@ -787,11 +674,11 @@
       var heightBubble = +svgBubble.attr("height"); // Use distinct var name
 
       // Selects the tooltip element
-      var tooltipBubble = d3.select("#tooltip"); // Use shared tooltip ID
+      const tooltipBubble = d3.select("#tooltip-bubble");
 
       // Defines a set of pastel colors for different attack types
-      var pastelColorsBubble = ["#b3e2cd", "#fdcdac", "#cbd5e8", "#f4cae4", "#e6f5c9", "#fff2ae"]; 
-      var colorScaleBubble = d3.scaleOrdinal().range(pastelColorsBubble); // Use distinct var name
+      var pastelColorsBubble = ["#66c2a5", "#fc8d62", "#8da0cb", "#e78ac3", "#a6d854", "#ffd92f"]; 
+      var colorScaleBubble = d3.scaleOrdinal().range(pastelColorsBubble); 
 
       // Loads and processes the CSV data
       d3.csv("https://gist.githubusercontent.com/bhavikenia/ddd1d445fdec0b82658516170bcb56e4/raw/d64e2b135844478c9bf98d8bfc171791d2a4ce1f/cyberdata.csv").then(function(data) {
@@ -865,13 +752,13 @@
             .style("left", (event.pageX + 15) + "px") 
             .style("top", (event.pageY - 40) + "px"); 
           })
-          .on("mousemove", function(event) { // Added mousemove based on other original scripts
+          .on("mousemove", function(event) { 
             tooltipBubble.style("left", (event.pageX + 15) + "px")
                    .style("top", (event.pageY - 40) + "px");
            })
           // Hide tooltip on mouseout
           .on("mouseout", function() {
-            tooltipBubble.transition().duration(200).style("opacity", 0); // Use shared tooltip
+            tooltipBubble.transition().duration(200).style("opacity", 0); 
           });
 
         // Add labels for each bubble
@@ -907,11 +794,71 @@
                 return d.y;
             });
         });
+
+        // Create and call d3-legend
+        const legendOrdinal = d3.legendColor()
+          .shape("rect")
+          .shapeWidth(20)
+          .shapeHeight(20)
+          .labelOffset(70)   
+          .labelAlign("end")
+          .cells(attackData.length)
+          .scale(colorScaleBubble)
+          .title("Attack Types");
+
+        svgBubble.append("g")
+          .attr("class", "legendOrdinal")
+          .attr("transform", "translate(50, 50)")
+          .call(legendOrdinal);
+
       }).catch(function (error) {
         // Handles errors in loading CSV
         console.error('Error loading the bubble chart data:', error);
     });
     </script>
 
+<section id="data"></section>
+<footer>
+    <p>© 2025 Bhavi Kenia</p>
+</footer>
+
+<!-- Searched online on how to do this part -->
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const scroller = scrollama();
+    
+        scroller
+            .setup({
+                step: '.chart-section, section',
+                offset: 0.4,
+                debug: false
+            })
+            .onStepEnter(response => {
+                response.element.classList.add('visible');
+                if (response.element.id === 'heatmapContainer') {
+                    d3.select("#heatmap svg").selectAll(".tile")
+                      .transition().duration(800).style("opacity", 1);
+                }
+                else if (response.element.id === 'lineChartContainer') {
+                    d3.select("#lineChart").selectAll(".line")
+                      .transition().duration(800).style("stroke-opacity", 1);
+                }
+                else if (response.element.id === 'mapContainer') {
+                    d3.select("#map svg").selectAll("path")
+                      .transition().duration(800).style("fill-opacity", 1);
+                }
+                else if (response.element.id === 'bubbleContainer') {
+                    d3.select("#bubbleSvg").selectAll("circle")
+                      .transition().duration(800).style("opacity", 1);
+                }
+
+            })
+            .onStepExit(response => {
+                response.element.classList.remove('visible');
+            });
+    
+        window.addEventListener('resize', scroller.resize);
+    });
+    </script>
 </body>
 </html>
